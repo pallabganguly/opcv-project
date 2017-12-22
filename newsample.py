@@ -3,15 +3,15 @@ import cv2
 
 #face_cascade = cv2.CascadeClassifier('casc.xml')
 #eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-hand_cascade = cv2.CascadeClassifier('cascade.xml')
+hand_cascade = cv2.CascadeClassifier('cascade_50_15.xml')
 
 cap = cv2.VideoCapture(0)
 
 while True:
 	ret, img = cap.read()
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-	# faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-	hands = hand_cascade.detectMultiScale(gray, 1.3, 5)
+	# faces = face_cascade.detectMultiScale(gray, 1.3, 8)
+	hands = hand_cascade.detectMultiScale(gray, 1.2,50, minSize=(25, 25), maxSize=(250, 250))
 	for (x,y,w,h) in hands:
 		# cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
 		cv2.rectangle(img,(x,y),(x+w,y+h),(79,233,252),2)
