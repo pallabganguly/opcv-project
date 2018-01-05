@@ -9,11 +9,11 @@ import cv2
 
 ht = 100
 i = 0
-os.chdir('/home/pallab/Pictures/Opencv-Images')
+os.chdir('/home/pallab/Pictures/Data/rawimgs')
 for pic in os.listdir('.'):
     img = cv2.imread(pic, cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, (ht, ht))
-    cv2.imwrite('/home/pallab/opcv/neg/'+str(i)+'.jpg', img)
+    cv2.imwrite('/home/pallab/Pictures/Data/treatedimgs/'+str(i)+'.jpg', img)
     i += 1
 
 print('Resized and greyed', i, 'files', sep = ' ')

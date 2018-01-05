@@ -3,29 +3,30 @@ import cv2
 import os
 from matplotlib import pyplot as plt
 
-hand_cascade = cv2.CascadeClassifier('cascade_30_15.xml')
-neighbours = [1, 3, 5, 10, 15, 20, 30, 40, 50]
+ssize = len(os.listdir('test50'))
 acc = []
-count = 0
+values = [5, 10, 15, 20, 50, 75, 100, 125, 150]
+zoom = [1.01, 1.03, 1.05, 1.10, 1.15, 1.20, 1.25, 1.35, 1.50]
+cscd = ['cascade_20x20.xml','cascade_30x30.xml', 'cascade_40x40.xml', 'cascade_50x50.xml']
+hand_cascade = cv2.CascadeClassifier('cascade_50_10.xml')
 
-for n in neighbours:
-	for pic in os.listdir('/home/pallab/opcv/test30'):
-		fn = pic[:-4]
-		pp = fn.split('_')
-		vals = list(map(int,pp))
-		img = cv2.imread(pic)
-		gray = cv2.imread(pic, 0)
+for n in values:
+	count = 0
+	for path in os.listdir('test50'):
+		img = cv2.imread('test50/'+path)
+		gray = cv2.imread('test50/'+path, 0)
 		hands = hand_cascade.detectMultiScale(gray, 1.03, n)
 		for (x,y,w,h) in hands:
-			print((x,y,w,h))
-			if abs(vals[1]-x)/vals[1] < 0.8 and abs(vals[2]-y)/vals[2] < 0.8:
+			fn = path[:-4]
+			pp = fn.split('_')
+			vals = list(map(int,pp))
+			us, xd, yd, wd, hd = vals
+			if abs(xd-x)/xd < 0.8 and abs(yd-y)/yd < 0.8:
 				count += 1
-				print('huha')
-			elif abs(vals[3]*vals[4] - w*h) / (vals[3]*vals[4]) < 0.8:
-				count += 1
-				print('huha')
-	acc.append(count)
-	count = 0
-print(acc)
-plt.plot(neighbours, acc)
+	count = min(count, ssize)
+	acc.append((count/ssize)*100)
+	print('n: ', n, 'Accuracy:',(count/ssize))
+plt.plot(values, acc)
+plt.xlabel('Neighbours')
+plt.ylabel('Accuracy %')
 plt.show()
