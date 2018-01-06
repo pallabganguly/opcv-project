@@ -14,19 +14,20 @@ def intersectingArea(a ,b ,c ,d ,e ,f ,g ,h):
     area = (bottomrightx - topleftx) * (bottomrighty - toplefty)
     return area
 
-ssize = len(os.listdir('test50'))
+prefix = '/home/pallab/opcv-project/'
+ssize = len(os.listdir(prefix+'test50'))
 acc = []
 values = [x for x in range(2, 100)]
 zoom = [1.01+x*0.01 for x in range(0, 100)]
 thres = [0.45+0.02*x for x in range(0, 15)]
-hand_cascade = cv2.CascadeClassifier('cascade_40x40.xml')
+hand_cascade = cv2.CascadeClassifier(prefix+'classifiers/cascade_40x40.xml')
 
 for n in thres:
 	count = 0
-	for path in os.listdir('test50'):
-		img = cv2.imread('test50/'+path)
-		gray = cv2.imread('test50/'+path, 0)
-		hands = hand_cascade.detectMultiScale(gray, 1.03, 5)
+	for path in os.listdir(prefix+'test50'):
+		img = cv2.imread(prefix+'test50/'+path, 0)
+		# print(hand_cascade.load(prefix+'classifiers/cascade_40x40.xml'))
+		hands = hand_cascade.detectMultiScale(img, 1.03, 5)
 		for (x,y,w,h) in hands: # (x, y, w, h) predicted values
 			fn = path[:-4]
 			pp = fn.split('_')
