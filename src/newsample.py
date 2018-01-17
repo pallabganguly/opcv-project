@@ -12,8 +12,8 @@ while True:
 	ret, img = cap.read()
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	# faces = face_cascade.detectMultiScale(gray, 1.3, 8)
-	hands = hand_cascade.detectMultiScale(gray, 1.03,25)
-	# hands = hand_cascade.detectMultiScale(gray, 1.8,27, minSize=(25, 25), maxSize=(250, 250))
+	# hands = hand_cascade.detectMultiScale(gray, 1.03,15)
+	hands = hand_cascade.detectMultiScale(gray, 1.15, 3, minSize=(50, 50),maxSize=(80, 80))
 	for (x,y,w,h) in hands:
 		# cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
 		cv2.rectangle(img,(x,y),(x+w,y+h),(79,233,252),2)

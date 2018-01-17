@@ -17,7 +17,7 @@ def intersectingArea(a ,b ,c ,d ,e ,f ,g ,h):
 # data to plot
 prefix = '/home/pallab/opcv-project/'
 ssize = len(os.listdir(prefix+'test50'))
-classifiers = ['cascade_30x30.xml', 'cascade_40x40.xml', 'cascade_50_10.xml', 'cascade_50_15.xml']
+classifiers = ['cascade_20_15.xml', 'cascade_30x30.xml', 'cascade_40x40.xml', 'cascade_50_10.xml', 'cascade_50_15.xml']
 acc = []
 for classifier in classifiers:
 	count = 0
@@ -25,7 +25,7 @@ for classifier in classifiers:
 		img = cv2.imread(prefix+'test50/'+path)
 		gray = cv2.imread(prefix+'test50/'+path, 0)
 		hand_cascade = cv2.CascadeClassifier(prefix+'classifiers/'+classifier)
-		hands = hand_cascade.detectMultiScale(gray, 1.03, 2)
+		hands = hand_cascade.detectMultiScale(gray, 1.99, 5)
 		for (x,y,w,h) in hands: # (x, y, w, h) predicted values
 			fn = path[:-4]
 			pp = fn.split('_')
@@ -38,9 +38,7 @@ for classifier in classifiers:
 	acc.append((count/ssize)*100)
 	print(classifier, 'Accuracy:',(count/ssize)*100)
 
-n_groups = 4
-means_frank = (0.90, 0.55, 0.75, 65)
-means_guido = (85, 62, 54, 20)
+n_groups = 5
  
 # create plot
 fig, ax = plt.subplots()
@@ -57,7 +55,7 @@ rects1 = plt.bar(classifiers, acc, bar_width,
 plt.xlabel('Classifier')
 plt.ylabel('Accuracy %')
 plt.title('Accuracy with different classifiers')
-plt.xticks(index + bar_width, ('30x30', '40x40', '50x50,10', '50x50,15'))
+plt.xticks(index + bar_width, ('20x20', '30x30', '40x40', '50x50,10', '50x50,15'))
 plt.legend()
  
 plt.tight_layout()
