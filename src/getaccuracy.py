@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 def intersectingArea(a ,b ,c ,d ,e ,f ,g ,h):
     if e>=c or a >= g or b >= h or f>=d:
         return 0
-    
+
     topleftx = max(a ,e)
     toplefty = max(b ,f)
     bottomrightx = min(c ,g)

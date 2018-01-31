@@ -1,12 +1,13 @@
 import numpy as np
 import cv2
 import os
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
+from bokeh.plotting import figure, show, output_file
 
 def intersectingArea(a ,b ,c ,d ,e ,f ,g ,h):
     if e>=c or a >= g or b >= h or f>=d:
         return 0
-    
+
     topleftx = max(a ,e)
     toplefty = max(b ,f)
     bottomrightx = min(c ,g)
@@ -14,10 +15,12 @@ def intersectingArea(a ,b ,c ,d ,e ,f ,g ,h):
     area = (bottomrightx - topleftx) * (bottomrighty - toplefty)
     return area
 
-# data to plot
+# output file for bokeh bar chart
+output_file('vbar.html')
+
 prefix = '/home/pallab/opcv-project/'
 ssize = len(os.listdir(prefix+'test50'))
-classifiers = ['cascade_20_15.xml', 'cascade_30x30.xml', 'cascade_40x40.xml', 'cascade_50_10.xml', 'cascade_50_15.xml']
+classifiers = ['cascade_20_20.xml', 'cascade_25_20.xml']#, 'cascade_40x40.xml', 'cascade_50_10.xml', 'cascade_50_15.xml']
 acc = []
 for classifier in classifiers:
 	count = 0
@@ -25,7 +28,7 @@ for classifier in classifiers:
 		img = cv2.imread(prefix+'test50/'+path)
 		gray = cv2.imread(prefix+'test50/'+path, 0)
 		hand_cascade = cv2.CascadeClassifier(prefix+'classifiers/'+classifier)
-		hands = hand_cascade.detectMultiScale(gray, 1.99, 5)
+		hands = hand_cascade.detectMultiScale(gray, 1.03, 5)
 		for (x,y,w,h) in hands: # (x, y, w, h) predicted values
 			fn = path[:-4]
 			pp = fn.split('_')
@@ -38,25 +41,10 @@ for classifier in classifiers:
 	acc.append((count/ssize)*100)
 	print(classifier, 'Accuracy:',(count/ssize)*100)
 
-n_groups = 5
- 
-# create plot
-fig, ax = plt.subplots()
-index = np.arange(n_groups)
-bar_width = 0.35
-opacity = 0.8
- 
-rects1 = plt.bar(classifiers, acc, bar_width,
-                 alpha=opacity,
-                 color='c',
-                 )
- 
- 
-plt.xlabel('Classifier')
-plt.ylabel('Accuracy %')
-plt.title('Accuracy with different classifiers')
-plt.xticks(index + bar_width, ('20x20', '30x30', '40x40', '50x50,10', '50x50,15'))
-plt.legend()
- 
-plt.tight_layout()
-plt.show()
+# creating plot
+
+p = figure(plot_width=400, plot_height=400)
+p.hbar(y=[1, 2], height=0.5, left=0,
+       right=acc, color="gray")
+
+show(p)
