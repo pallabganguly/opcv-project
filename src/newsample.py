@@ -4,7 +4,7 @@ import cv2
 #face_cascade = cv2.CascadeClassifier('casc.xml')
 #eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 prefix = '/home/pallab/opcv-project/classifiers/'
-hand_cascade = cv2.CascadeClassifier(prefix+'cascade_20_15.xml')
+hand_cascade = cv2.CascadeClassifier(prefix+'cascade_20_20.xml')
 
 cap = cv2.VideoCapture(0)
 
