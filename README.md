@@ -22,4 +22,4 @@ There are scripts to generate plots of accuracy versus several parameters of HAA
 Navigate to ./src and run python <filename>.py to run the respective script
 
 
-Note: This repository contains original research work done by the author. Please include proper citations when using any of the results obtained from this repository.
+### Note: This repository contains original research work done by the author. Please include proper citations when using any of the results obtained from this repository.
