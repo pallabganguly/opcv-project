@@ -23,5 +23,6 @@ Navigate to ./src and run python <filename>.py to run the respective script
 
 ## Results:
 ![GitHub Logo](/graphs/diffclassifier.png)
+![GitHub Logo](/graphs/stages15thres70scale103.png)
 
 ### Note: This repository contains original research work done by the author. Please include proper citations when using any of the results obtained from this repository.
