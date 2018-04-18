@@ -21,5 +21,7 @@ If you want the data for re-training, please contact pallab.ganguly@kgec.edu.in
 There are scripts to generate plots of accuracy versus several parameters of HAAR classifier
 Navigate to ./src and run python <filename>.py to run the respective script
 
+## Results:
+![GitHub Logo](/graphs/diffclassifier.png)
 
 ### Note: This repository contains original research work done by the author. Please include proper citations when using any of the results obtained from this repository.
